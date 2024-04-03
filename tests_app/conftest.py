@@ -6,8 +6,7 @@ from dotenv import load_dotenv
 from appium import webdriver
 import allure
 
-import utils.allure
-from utils import allure
+from action_of_selene import utils
 
 load_dotenv()
 USERNAME = os.getenv('USER_NAME')

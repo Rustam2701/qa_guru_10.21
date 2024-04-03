@@ -1,12 +1,19 @@
+import os
+
 import allure
-import config
-import requests
+from dotenv import load_dotenv
+
+load_dotenv()
+USERNAME = os.getenv('USER_NAME')
+ACCESSKEY = os.getenv('ACCESS_KEY')
 
 
 def attach_bstack_video(session_id):
+
+    import requests
     bstack_session = requests.get(
         f'https://api.browserstack.com/app-automate/sessions/{session_id}.json',
-        auth=(config.bstack_userName, config.bstack_accessKey),
+        auth=(USERNAME, ACCESSKEY),
     ).json()
     print(bstack_session)
     video_url = bstack_session['automation_session']['video_url']
