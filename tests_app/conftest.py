@@ -3,10 +3,11 @@ from appium.options.android import UiAutomator2Options
 from selene import browser
 import os
 from dotenv import load_dotenv
+from appium import webdriver
 
 load_dotenv()
-USERNAME = os.getenv('USERNAME')
-ACCESSKEY = os.getenv('ACCESSKEY')
+USERNAME = os.getenv('USER_NAME')
+ACCESSKEY = os.getenv('ACCESS_KEY')
 
 
 @pytest.fixture(scope='function', autouse=True)
@@ -32,10 +33,7 @@ def mobile_management():
         }
     })
 
-    # browser.config.driver = webdriver.Remote("http://hub.browserstack.com/wd/hub", options=options)
-    browser.config.driver_remote_url = 'http://hub.browserstack.com/wd/hub'
-    browser.config.driver_options = options
-
+    browser.config.driver = webdriver.Remote('http://hub.browserstack.com/wd/hub', options=options)
     browser.config.timeout = float(os.getenv('timeout', '10.0'))
 
     yield
