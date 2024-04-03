@@ -6,7 +6,8 @@ from dotenv import load_dotenv
 from appium import webdriver
 import allure
 
-import utils
+import utils.allure
+from utils import allure
 
 load_dotenv()
 USERNAME = os.getenv('USER_NAME')
@@ -57,5 +58,4 @@ def mobile_management():
 
     with allure.step('tear down app session'):
         browser.quit()
-
     utils.allure.attach_bstack_video(session_id)
